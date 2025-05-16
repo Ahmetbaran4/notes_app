@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>{% if guncelle %}Notu Düzenle{% else %}Yeni Not Ekle{% endif %}</h2>
+    <form method="post">
+        <label>Başlık:</label><br>
+        <input type="text" name="baslik" value="{{ baslik if baslik else '' }}"><br><br>
+
+        <label>İçerik:</label><br>
+        <textarea name="icerik" rows="5" cols="30">{{ icerik if icerik else '' }}</textarea><br><br>
+
+        <button type="submit">
+            {% if guncelle %}Güncelle{% else %}Kaydet{% endif %}
+        </button>
+    </form>
+{% endblock %}

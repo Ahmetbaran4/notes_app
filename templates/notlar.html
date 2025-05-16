@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+    <h2>Notlarınız</h2>
+
+    <form method="get" action="{{ url_for('notlar_goster') }}" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="q" placeholder="Not ara..." class="form-control" value="{{ request.args.get('q', '') }}">
+            <button type="submit" class="btn btn-primary">Ara</button>
+        </div>
+    </form>
+
+    {% for not_ in notlar %}
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title">{{ not_.title }}</h5>
+                <p class="card-text">{{ not_.content }}</p>
+                <a href="{{ url_for('duzenle', not_id=not_.id) }}" class="btn btn-sm btn-warning">Düzenle</a>
+                <a href="{{ url_for('sil', not_id=not_.id) }}" class="btn btn-sm btn-danger"
+                   onclick="return confirm('Bu notu silmek istediğinize emin misiniz?')">Sil</a>
+            </div>
+        </div>
+    {% else %}
+        <p>Hiç not bulunamadı.</p>
+    {% endfor %}
+{% endblock %}
